@@ -1,12 +1,34 @@
-﻿<Window x:Class="AzureClientUI.MainWindow"
+﻿<controls:MetroWindow x:Class="AzureClientUI.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:local="clr-namespace:AzureClientUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Azure" Height="720" Width="1080">
     <Grid>
-        
+        <StackPanel>
+            <GroupBox Header="Connect to Target" Height="200" Margin="300,100,300,100" MaxWidth="600" MinWidth="60">
+                <Grid>
+                    <Grid Margin="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Label>IP Address:</Label>
+                        <TextBox Grid.Column="1" Margin="0,0,0,10" />
+                        <Label Grid.Row="1">Port:</Label>
+                        <TextBox Grid.Row="1" Grid.Column="1" Margin="0,0,0,10" />
+                    </Grid>
+                    <Button Content="Connect" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,100,0,0" Width="75" Style="{StaticResource AccentedSquareButtonStyle}"/>
+                </Grid>
+            </GroupBox>
+        </StackPanel>
     </Grid>
-</Window>
+</controls:MetroWindow>
