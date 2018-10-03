@@ -26,45 +26,5 @@ namespace AzureClientUI
         {
             InitializeComponent();
         }
-
-        private void ListView_Loaded(object sender, RoutedEventArgs e)
-        {
-            var listView = sender as ListView;
-            if (listView != null)
-            {
-                var gvhrp = FindFirstVisual<GridViewHeaderRowPresenter>(listView);
-                if (gvhrp != null)
-                {
-                    var separator = FindFirstVisual<Separator>(gvhrp);
-                    if (separator != null)
-                    {
-                        separator.Background = Brushes.Red;
-                    }
-                }
-            }
-        }
-
-        T FindFirstVisual<T>(DependencyObject depObj) where T : DependencyObject
-        {
-            if (depObj != null)
-            {
-                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
-                {
-                    DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
-                    if (child != null && child is T)
-                    {
-                        return (T)child;
-                    }
-
-                    var result = FindFirstVisual<T>(child);
-                    if (result != null)
-                    {
-                        return result;
-                    }
-                }
-            }
-
-            return null;
-        }
     }
 }

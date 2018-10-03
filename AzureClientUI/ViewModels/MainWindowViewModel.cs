@@ -5,28 +5,39 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using AzureClientUI.Models;
 using MahApps.Metro.Controls.Dialogs;
-
+using System.Diagnostics;
 namespace AzureClientUI.ViewModels
 {
     public class MainWindowViewModel : INotifyPropertyChanged
     {
-        public List<Process> Processes { get; set; }
+        public List<Models.Process> Processes { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
 
         public MainWindowViewModel()
         {
-            Processes = new List<Process>();
+            Processes = new List<Models.Process>();
 
-            for (int i = 0; i < 50; i++)
+            var processes = Process.GetProcesses();
+
+            foreach (var process in processes)
             {
-                Processes.Add(new Process
+                if (!String.IsNullOrEmpty(process.MainWindowTitle))
                 {
-                    PID = 100 + i,
-                    Name = String.Format("Test{0}.exe", i+1),
-                    Path = String.Format("C:\\Windows\\Test{0}.exe", i+1)
-                });
+                    try
+                    {
+                        Processes.Add(new Models.Process
+                        {
+                            PID = process.Id,
+                            Name = process.ProcessName,
+                            Path = process.MainModule.FileName
+                        });
+                    }
+                    catch (Win32Exception e)
+                    {
+                        Console.WriteLine("Could not load details about process {0} [{1}]", process, e);
+                    }
+                }
             }
         }
 

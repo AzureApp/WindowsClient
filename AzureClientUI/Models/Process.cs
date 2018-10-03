@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Drawing;
 
 namespace AzureClientUI.Models
 {
@@ -43,6 +44,18 @@ namespace AzureClientUI.Models
 
                 _path = value;
                 OnPropertyChanged();
+            }
+        }
+
+        public Icon Icon
+        {
+            get
+            {
+                if (_path != null)
+                {
+                    return Icon.ExtractAssociatedIcon(_path);
+                }
+                return null;
             }
         }
 

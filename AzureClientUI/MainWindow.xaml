@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:AZViewModels="clr-namespace:AzureClientUI.ViewModels"
+        xmlns:Helpers="clr-namespace:AzureClientUI.Helpers"
         xmlns:local="clr-namespace:AzureClientUI"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance AZViewModels:MainWindowViewModel}"
@@ -105,6 +106,9 @@
                     </Trigger>
                 </Style.Triggers>
             </Style>
+            <Style x:Key="disabledColumn" TargetType="GridViewColumnHeader" BasedOn="{StaticResource MetroGridViewColumnHeader}">
+                <Setter Property="IsEnabled" Value="False"/>
+            </Style>
         </Grid.Resources>
         <DockPanel>
             <Menu Margin="2 0 0 0"
@@ -125,9 +129,16 @@
                 <ListView Margin="2"
                       BorderThickness="1"
                       ItemsSource="{Binding Processes}"
-                      SelectedIndex="0" BorderBrush="{StaticResource BorderBrushNormal}" Loaded="ListView_Loaded">
+                      SelectedIndex="0" BorderBrush="{StaticResource BorderBrushNormal}">
+                    <ListView.Resources>
+                        <Helpers:IconConverter x:Key="IconConverter"/>
+                        <DataTemplate x:Key="IconTemplate">
+                            <Image Source="{Binding Icon, Converter={StaticResource IconConverter}}" MaxWidth="{Binding Width}" MaxHeight="{Binding Height}" Margin="4"/>
+                        </DataTemplate>
+                    </ListView.Resources>
                     <ListView.View>
                         <GridView ColumnHeaderContainerStyle="{DynamicResource MetroGridViewColumnHeader}">
+                            <local:UnresizableGridViewColumn CellTemplate="{StaticResource IconTemplate}" FixedWidth="40"/>
                             <GridViewColumn DisplayMemberBinding="{Binding PID}" Header="PID" />
                             <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Name" />
                         </GridView>
