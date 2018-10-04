@@ -21,7 +21,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid>
+    <Grid Margin="12 12 12 12">
         <Grid.Resources>
             <!-- Apply custom styling to the list view header - style taken from MahApps source code -->
             <Style x:Key="GridViewColumnHeaderGripper" TargetType="Thumb">
@@ -107,23 +107,46 @@
                 <Setter Property="IsEnabled" Value="False"/>
             </Style>
         </Grid.Resources>
-        <ListView Margin="2"
-                  BorderThickness="1"
-                  ItemsSource="{Binding Processes}"
-                  SelectedIndex="0" BorderBrush="{StaticResource BorderBrushNormal}">
-            <ListView.Resources>
-                <Helpers:IconConverter x:Key="IconConverter"/>
-                <DataTemplate x:Key="IconTemplate">
-                    <Image Source="{Binding Icon, Converter={StaticResource IconConverter}}" MaxWidth="{Binding Width}" MaxHeight="{Binding Height}" Margin="4"/>
-                </DataTemplate>
-            </ListView.Resources>
-            <ListView.View>
-                <GridView ColumnHeaderContainerStyle="{DynamicResource MetroGridViewColumnHeader}">
-                    <local:UnresizableGridViewColumn CellTemplate="{StaticResource IconTemplate}" FixedWidth="40"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding PID}" Header="PID" />
-                    <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Name" />
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal"
+                    Margin="20"
+                    Grid.Row="0">
+            <ComboBox Text="Memes"></ComboBox>
+        </StackPanel>
+ 
+            <ListView BorderThickness="1"
+                      Grid.Row="1"
+                      ItemsSource="{Binding Processes}"
+                      SelectedIndex="0" BorderBrush="{StaticResource BorderBrushNormal}">
+                <ListView.Resources>
+                    <Helpers:IconConverter x:Key="IconConverter"/>
+                    <DataTemplate x:Key="IconTemplate">
+                        <Image Source="{Binding Icon, Converter={StaticResource IconConverter}}" MaxWidth="{Binding Width}" MaxHeight="{Binding Height}" Margin="4"/>
+                    </DataTemplate>
+                </ListView.Resources>
+                <ListView.View>
+                    <GridView ColumnHeaderContainerStyle="{DynamicResource MetroGridViewColumnHeader}">
+                        <local:UnresizableGridViewColumn CellTemplate="{StaticResource IconTemplate}" FixedWidth="40"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding PID}" Header="PID" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Name" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="2"
+                    HorizontalAlignment="Right"
+                    Margin="0 20 0 0">
+            <Button Content="Kill"
+                    Height="32"
+                    Width="60"
+                    Margin="0 0 20 0"/>
+            <Button Content="Connect" 
+                    Height="32"
+                    Width="100" />
+        </StackPanel>
     </Grid>
 </UserControl>
