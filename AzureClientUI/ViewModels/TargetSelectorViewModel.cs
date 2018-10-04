@@ -7,14 +7,15 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using MahApps.Metro.Controls.Dialogs;
 using System.Diagnostics;
+
 namespace AzureClientUI.ViewModels
 {
-    public class MainWindowViewModel : INotifyPropertyChanged
+    public class TargetSelectorViewModel : INotifyPropertyChanged
     {
         public List<Models.Process> Processes { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public MainWindowViewModel()
+        public TargetSelectorViewModel()
         {
             Processes = new List<Models.Process>();
 

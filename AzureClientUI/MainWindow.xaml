@@ -4,16 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:AZControls="clr-namespace:AzureClientUI.Controls"
         xmlns:AZViewModels="clr-namespace:AzureClientUI.ViewModels"
-        xmlns:Helpers="clr-namespace:AzureClientUI.Helpers"
-        xmlns:local="clr-namespace:AzureClientUI"
         mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance AZViewModels:MainWindowViewModel}"
         Style="{DynamicResource AZVSWindowStyle}"
         Title="Azure" Height="720" Width="1080">
-    <Window.DataContext>
-        <AZViewModels:MainWindowViewModel/>
-    </Window.DataContext>
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -25,91 +20,6 @@
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
-        <Grid.Resources>
-            <!-- Apply custom styling to the list view header - style taken from MahApps source code -->
-            <Style x:Key="GridViewColumnHeaderGripper" TargetType="Thumb">
-                <Setter Property="Background" Value="{DynamicResource BorderBrushNormal}" />
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type Thumb}">
-                            <Border Margin="0 0 0 2"
-                            Padding="{TemplateBinding Padding}"
-                            Background="Transparent">
-                                <Rectangle Width="1"
-                                   HorizontalAlignment="Center"
-                                   Fill="{TemplateBinding Background}" />
-                            </Border>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="Width" Value="18" />
-            </Style>
-            <Style x:Key="MetroGridViewColumnHeader" TargetType="GridViewColumnHeader">
-                <Setter Property="controls:ControlsHelper.ContentCharacterCasing" Value="Upper" />
-                <Setter Property="FontWeight" Value="SemiBold" />
-                <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
-                <Setter Property="HorizontalContentAlignment" Value="Left" />
-                <Setter Property="Padding" Value="4 2 4 2" />
-                <Setter Property="SnapsToDevicePixels" Value="True" />
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="GridViewColumnHeader">
-                            <Grid>
-                                <Rectangle Fill="Transparent" IsHitTestVisible="True" />
-                                <Border x:Name="HeaderBorder">
-                                    <controls:ContentControlEx x:Name="HeaderContent"
-                                                       Margin="0 0 0 1"
-                                                       Padding="{TemplateBinding Padding}"
-                                                       HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                       VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                       Content="{TemplateBinding Content}"
-                                                       ContentCharacterCasing="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ControlsHelper.ContentCharacterCasing)}"
-                                                       ContentStringFormat="{TemplateBinding ContentStringFormat}"
-                                                       ContentTemplate="{TemplateBinding ContentTemplate}"
-                                                       ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
-                                                       RecognizesAccessKey="True"
-                                                       SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                                </Border>
-                                <Thumb x:Name="PART_HeaderGripper"
-                               Margin="0 0 -9 0"
-                               HorizontalAlignment="Right"
-                               Style="{StaticResource GridViewColumnHeaderGripper}" />
-                            </Grid>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsPressed" Value="True">
-                                    <Setter TargetName="HeaderBorder" Property="Background" Value="{DynamicResource GrayBrush8}" />
-                                    <Setter TargetName="HeaderContent" Property="Margin" Value="1 1 0 0" />
-                                </Trigger>
-                                <Trigger Property="IsEnabled" Value="False">
-                                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="VerticalContentAlignment" Value="Center" />
-                <Style.Triggers>
-                    <Trigger Property="Role" Value="Floating">
-                        <Setter Property="Opacity" Value="0.7" />
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="GridViewColumnHeader">
-                                    <Canvas Name="PART_FloatingHeaderCanvas">
-                                        <Rectangle Width="{TemplateBinding ActualWidth}"
-                                           Height="{TemplateBinding ActualHeight}"
-                                           Fill="{DynamicResource AccentColorBrush3}" />
-                                        <!--  Fill="#60000000" />  -->
-                                    </Canvas>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
-            <Style x:Key="disabledColumn" TargetType="GridViewColumnHeader" BasedOn="{StaticResource MetroGridViewColumnHeader}">
-                <Setter Property="IsEnabled" Value="False"/>
-            </Style>
-        </Grid.Resources>
         <DockPanel>
             <Menu Margin="2 0 0 0"
               DockPanel.Dock="Top"
@@ -125,26 +35,9 @@
 
                 </MenuItem>
             </Menu>
-            <UniformGrid Columns="2">
-                <ListView Margin="2"
-                      BorderThickness="1"
-                      ItemsSource="{Binding Processes}"
-                      SelectedIndex="0" BorderBrush="{StaticResource BorderBrushNormal}">
-                    <ListView.Resources>
-                        <Helpers:IconConverter x:Key="IconConverter"/>
-                        <DataTemplate x:Key="IconTemplate">
-                            <Image Source="{Binding Icon, Converter={StaticResource IconConverter}}" MaxWidth="{Binding Width}" MaxHeight="{Binding Height}" Margin="4"/>
-                        </DataTemplate>
-                    </ListView.Resources>
-                    <ListView.View>
-                        <GridView ColumnHeaderContainerStyle="{DynamicResource MetroGridViewColumnHeader}">
-                            <local:UnresizableGridViewColumn CellTemplate="{StaticResource IconTemplate}" FixedWidth="40"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding PID}" Header="PID" />
-                            <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Name" />
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-            </UniformGrid>
+            <StackPanel Orientation="Horizontal" MaxWidth="300" HorizontalAlignment="Left">
+                <AZControls:TargetSelector Width="300" HorizontalContentAlignment="Stretch"/>
+            </StackPanel>
         </DockPanel>
     </Grid>
 </controls:MetroWindow>
