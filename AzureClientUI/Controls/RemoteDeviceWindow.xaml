@@ -1,0 +1,35 @@
+﻿<controls:MetroWindow x:Class="AzureClientUI.Controls.RemoteDeviceWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AzureClientUI.Controls"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        mc:Ignorable="d"
+        Title="Connect to Remote Device"
+        Height="400"
+        Width="300"
+        MinHeight="250"
+        MinWidth="300"
+        ResizeMode="CanResizeWithGrip"
+        ShowInTaskbar="False"
+        Style="{DynamicResource AZVSWindowStyle}"
+        Background="{DynamicResource AZVSWindowBackground}"
+        WindowStartupLocation="CenterOwner">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="AZVSWindowStyle" TargetType="{x:Type controls:MetroWindow}" BasedOn="{StaticResource VSWindowStyleKey}"/>
+            <Style TargetType="{x:Type controls:WindowButtonCommands}" BasedOn="{StaticResource MahApps.Metro.Styles.WindowButtonCommands.Win10}"/>
+            <SolidColorBrush x:Key="AZVSWindowBackground" Color="{DynamicResource WhiteColor}" Opacity="0.8"/>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.Effect>
+            <DropShadowEffect BlurRadius="15" Direction="-90" RenderingBias="Quality" ShadowDepth="2"/>
+        </Grid.Effect>
+    </Grid>
+</controls:MetroWindow>

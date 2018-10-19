@@ -66,15 +66,23 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\RemoteDeviceWindow.xaml.cs">
+      <DependentUpon>RemoteDeviceWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TargetSelector.xaml.cs">
       <DependentUpon>TargetSelector.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\IconConverter.cs" />
     <Compile Include="Controls\UnresizableGridViewColumn.cs" />
+    <Compile Include="Helpers\RelayCommand.cs" />
     <Compile Include="ViewModels\TargetSelectorViewModel.cs" />
     <Page Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\RemoteDeviceWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\TargetSelector.xaml">
       <SubType>Designer</SubType>
