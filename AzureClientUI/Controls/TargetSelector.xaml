@@ -9,7 +9,7 @@
              xmlns:Helpers="clr-namespace:AzureClientUI.Helpers"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance AZViewModels:TargetSelectorViewModel, IsDesignTimeCreatable=True}"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="720" d:DesignWidth="400">
     <UserControl.DataContext>
         <AZViewModels:TargetSelectorViewModel/>
     </UserControl.DataContext>
@@ -108,38 +108,90 @@
             </Style>
         </Grid.Resources>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        <GroupBox Header="Device Settings" 
+                  Margin="0,0,0,20">
+            <Grid x:Name="settingsGrid">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <!--<StackPanel Orientation="Vertical" 
+                            Margin="5"
+                            Grid.Row="0">
+                    <Label Content="Filter Processes"/>
+                    <CheckBox Content="Applications" Margin="0,0,0,5"></CheckBox>
+                    <CheckBox Content="System Processes"></CheckBox>
+                </StackPanel>-->
+                <StackPanel Orientation="Vertical"
+                            Margin="5"
+                            Width="{Binding ActualWidth, ElementName=settingsGrid}"
+                            HorizontalAlignment="Left"
+                            Grid.Row="0">
+                    <Label Content="Choose Target Device" Padding="0,0,0,5"/>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition Width="200"/>
+                        </Grid.ColumnDefinitions>
+                        <ComboBox Text="Memes" 
+                                  Width="200"
+                                  Grid.Column="0" 
+                                  HorizontalAlignment="Left" Grid.ColumnSpan="2"/>
+                        <Button Content="Add Remote Device"
+                                Width="120"
+                                Grid.Column="1"
+                                HorizontalAlignment="Center" />
+                    </Grid>
+                </StackPanel>
+
+            </Grid>
+        </GroupBox>
         <StackPanel Orientation="Horizontal"
-                    Margin="20"
-                    Grid.Row="0">
-            <ComboBox Text="Memes"></ComboBox>
+                    Grid.Row="1">
+            <Label Content="Filter Processes:"
+                   VerticalAlignment="Center"
+                   Margin="-5,0,0,0"
+                   FontSize="10"/>
         </StackPanel>
- 
-            <ListView BorderThickness="1"
-                      Grid.Row="1"
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Grid.Row="1">
+            <CheckBox Content="Applications" Margin="5,0,5,0"></CheckBox>
+            <CheckBox Content="Windows" Margin="5,0,5,0"></CheckBox>
+            <CheckBox Content="System Processes" Margin="5,0,5,0"></CheckBox>
+        </StackPanel>
+        <ListView BorderThickness="1"
+                      Grid.Row="2"
                       ItemsSource="{Binding Processes}"
                       SelectedIndex="0" BorderBrush="{StaticResource BorderBrushNormal}">
-                <ListView.Resources>
-                    <Helpers:IconConverter x:Key="IconConverter"/>
-                    <DataTemplate x:Key="IconTemplate">
-                        <Image Source="{Binding Icon, Converter={StaticResource IconConverter}}" MaxWidth="{Binding Width}" MaxHeight="{Binding Height}" Margin="4"/>
-                    </DataTemplate>
-                </ListView.Resources>
-                <ListView.View>
-                    <GridView ColumnHeaderContainerStyle="{DynamicResource MetroGridViewColumnHeader}">
-                        <local:UnresizableGridViewColumn CellTemplate="{StaticResource IconTemplate}" FixedWidth="40"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding PID}" Header="PID" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Name" />
-                    </GridView>
-                </ListView.View>
-            </ListView>
+            <ListView.Resources>
+                <Helpers:IconConverter x:Key="IconConverter"/>
+                <DataTemplate x:Key="IconTemplate">
+                    <Image Source="{Binding Icon, Converter={StaticResource IconConverter}}" MaxWidth="{Binding Width}" MaxHeight="{Binding Height}" Margin="4"/>
+                </DataTemplate>
+            </ListView.Resources>
+            <ListView.View>
+                <GridView ColumnHeaderContainerStyle="{DynamicResource MetroGridViewColumnHeader}">
+                    <local:UnresizableGridViewColumn CellTemplate="{StaticResource IconTemplate}" FixedWidth="40"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding PID}" Header="PID" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Name" />
+                </GridView>
+            </ListView.View>
+        </ListView>
         <StackPanel Orientation="Horizontal"
-                    Grid.Row="2"
+                    Grid.Row="3"
                     HorizontalAlignment="Right"
-                    Margin="0 20 0 0">
+                    Margin="0 20 0 0" Width="180">
             <Button Content="Kill"
                     Height="32"
                     Width="60"
