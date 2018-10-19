@@ -150,7 +150,8 @@
                         <Button Content="Add Remote Device"
                                 Width="120"
                                 Grid.Column="1"
-                                HorizontalAlignment="Center" />
+                                HorizontalAlignment="Center"
+                                Command="{Binding RemoteDeviceButtonCommand}"/>
                     </Grid>
                 </StackPanel>
 
@@ -160,15 +161,14 @@
                     Grid.Row="1">
             <Label Content="Filter Processes:"
                    VerticalAlignment="Center"
-                   Margin="-5,0,0,0"
                    FontSize="10"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Right"
                     Grid.Row="1">
-            <CheckBox Content="Applications" Margin="5,0,5,0"></CheckBox>
-            <CheckBox Content="Windows" Margin="5,0,5,0"></CheckBox>
-            <CheckBox Content="System Processes" Margin="5,0,5,0"></CheckBox>
+            <CheckBox Content="Applications" Margin="5,0,10,0" FontSize="10"></CheckBox>
+            <CheckBox Content="Windows" Margin="5,0,10,0" FontSize="10"></CheckBox>
+            <CheckBox Content="System Processes" Margin="5,0,0,0" FontSize="10"></CheckBox>
         </StackPanel>
         <ListView BorderThickness="1"
                       Grid.Row="2"
