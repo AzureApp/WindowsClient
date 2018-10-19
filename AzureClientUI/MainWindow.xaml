@@ -8,7 +8,7 @@
         xmlns:AZViewModels="clr-namespace:AzureClientUI.ViewModels"
         mc:Ignorable="d"
         Style="{DynamicResource AZVSWindowStyle}"
-        Title="Azure" Height="720" Width="1280">
+        Title="Azure" Height="720" Width="1280" MinHeight="720" MinWidth="1280">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
