@@ -57,7 +57,27 @@
                         </ListView>
                     </Grid>
                 </TabItem>
-                <TabItem Header="Add Device Manually" controls:TabControlHelper.CloseButtonEnabled="False"></TabItem>
+                <TabItem Header="Add Device Manually" controls:TabControlHelper.CloseButtonEnabled="False">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Content="Connect To Device" 
+                               FontSize="18"
+                               Grid.Row="0"/>
+                        <StackPanel Orientation="Horizontal" Grid.Row="1">
+                            <Label Content="Address:"></Label>
+                            <TextBox Margin="5,0,5,0" Width="140"></TextBox>
+                            <Label Content="Port: "></Label>
+                            <TextBox  Width="40"></TextBox>
+                        </StackPanel>
+                        <StackPanel Grid.Row="2" HorizontalAlignment="Left">
+                            <Button Content="Connect" Margin="5,10,0,10" Width="120" Height="24"/>
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
             </TabControl>
         </StackPanel>
     </Grid>

@@ -10,6 +10,7 @@ namespace AzureClientUI
 {
     class ConnectionManager
     {
+        private List<ClientConnection> connections = new List<ClientConnection>();
         public ClientConnection Connect(string ip, int port)
         {
             TcpClient client = null;
@@ -18,8 +19,11 @@ namespace AzureClientUI
                 client = new TcpClient();
                 client.Connect(ip, port);
 
-                return new ClientConnection(client);
-            } catch (SocketException e)
+                var cc = new ClientConnection(client);
+                connections.Add(cc);
+                return cc;
+            }
+            catch (SocketException e)
             {
                 Console.WriteLine("SocketException e: {0}", e);
             }
