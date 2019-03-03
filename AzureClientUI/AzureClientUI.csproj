@@ -77,6 +77,7 @@
     <Compile Include="Controls\UnresizableGridViewColumn.cs" />
     <Compile Include="Helpers\RelayCommand.cs" />
     <Compile Include="Helpers\TextBoxHelper.cs" />
+    <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\DeviceModel.cs" />
     <Compile Include="Models\RemoteDeviceConnectorModel.cs" />
     <Compile Include="ViewModels\RemoteDeviceConnectorViewModel.cs" />

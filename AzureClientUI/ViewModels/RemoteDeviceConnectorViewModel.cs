@@ -28,11 +28,24 @@ namespace AzureClientUI.ViewModels
         private void Connect(object param)
         {
             Console.WriteLine("connecting to {0}:{1}", RemoteDevice.Address, RemoteDevice.Port);
+
+            int port;
+
+            if (!Int32.TryParse(RemoteDevice.Port, out port))
+            {
+                return;
+            }
+            // This code is only temporary
+            // TODO: move device connections to a global store of some sort
+            ConnectionManager manager = new ConnectionManager();
+
+            ClientConnection client = manager.Connect(RemoteDevice.Address, port);
+            client.Run();
         }
 
         private bool CanConnect(object param)
         {
-            return (RemoteDevice.Address != null && RemoteDevice.Port != null);
+            return !RemoteDevice.HasErrors;
         }
 
         protected virtual void RaisePropertyChanged(string propertyName)

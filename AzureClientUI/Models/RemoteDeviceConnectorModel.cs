@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AzureClientUI.Models
 {
-    class RemoteDeviceConnectorModel : INotifyPropertyChanged
+    class RemoteDeviceConnectorModel : BaseModel
     {
         private string address;
         private string port;
@@ -37,12 +38,29 @@ namespace AzureClientUI.Models
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        public override IEnumerable GetErrors([CallerMemberName] string propertyName = null)
         {
-            var handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+            foreach (var obj in base.GetErrors(propertyName))
+            {
+                yield return obj;
+            }
+
+            if (string.IsNullOrEmpty(propertyName) || propertyName == nameof(Address))
+            {
+                if (string.IsNullOrWhiteSpace(address))
+                {
+                    yield return "No address provided";
+                }
+            }
+
+            if (string.IsNullOrEmpty(propertyName) || propertyName == nameof(Port))
+            {
+                short port = 0;
+                if (!Int16.TryParse(Port, out port))
+                {
+                    yield return "Port invalid";
+                }
+            }
         }
     }
 }
