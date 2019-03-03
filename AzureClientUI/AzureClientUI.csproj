@@ -76,6 +76,10 @@
     <Compile Include="Helpers\IconConverter.cs" />
     <Compile Include="Controls\UnresizableGridViewColumn.cs" />
     <Compile Include="Helpers\RelayCommand.cs" />
+    <Compile Include="Helpers\TextBoxHelper.cs" />
+    <Compile Include="Models\DeviceModel.cs" />
+    <Compile Include="Models\RemoteDeviceConnectorModel.cs" />
+    <Compile Include="ViewModels\RemoteDeviceConnectorViewModel.cs" />
     <Compile Include="ViewModels\TargetSelectorViewModel.cs" />
     <Page Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -106,7 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataObjects\MetaObject.cs" />
-    <Compile Include="Models\Process.cs" />
+    <Compile Include="Models\ProcessModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

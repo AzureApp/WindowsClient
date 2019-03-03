@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AzureClientUI.Controls"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:AZViewModels="clr-namespace:AzureClientUI.ViewModels"
+        xmlns:Helpers="clr-namespace:AzureClientUI.Helpers"
         mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance AZViewModels:RemoteDeviceConnectorViewModel, IsDesignTimeCreatable=True}"
         Title="Connect to Remote Device"
         Height="450"
         Width="400"
@@ -27,6 +30,9 @@
             <SolidColorBrush x:Key="AZVSWindowBackground" Color="{DynamicResource WhiteColor}" Opacity="0.8"/>
         </ResourceDictionary>
     </Window.Resources>
+    <Window.DataContext>
+        <AZViewModels:RemoteDeviceConnectorViewModel/>
+    </Window.DataContext>
     <Grid>
         <StackPanel>
             <TabControl>
@@ -68,13 +74,21 @@
                                FontSize="18"
                                Grid.Row="0"/>
                         <StackPanel Orientation="Horizontal" Grid.Row="1">
-                            <Label Content="Address:"></Label>
-                            <TextBox Margin="5,0,5,0" Width="140"></TextBox>
-                            <Label Content="Port: "></Label>
-                            <TextBox  Width="40"></TextBox>
+                            <Label Content="Address:"/>
+                            <TextBox Margin="5,0,5,0" 
+                                     Width="140" 
+                                     Text="{Binding RemoteDevice.Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <Label Content="Port: "/>
+                            <TextBox  Width="40"
+                                      Tag="1248"
+                                      Text="{Binding RemoteDevice.Port, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                         <StackPanel Grid.Row="2" HorizontalAlignment="Left">
-                            <Button Content="Connect" Margin="5,10,0,10" Width="120" Height="24"/>
+                            <Button Content="Connect" 
+                                    Margin="5,10,0,10"
+                                    Width="120" 
+                                    Height="24" 
+                                    Command="{Binding ConnectCommand}"/>
                         </StackPanel>
                     </Grid>
                 </TabItem>
