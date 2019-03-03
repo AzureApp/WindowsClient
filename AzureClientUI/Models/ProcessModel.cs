@@ -5,12 +5,12 @@ using System.Drawing;
 
 namespace AzureClientUI.Models
 {
-    public class Process : INotifyPropertyChanged
+    public class ProcessModel : INotifyPropertyChanged
     {
         private int _pid;
         private string _name;
         private string _path;
-       
+
         public int PID
         {
             get => _pid;

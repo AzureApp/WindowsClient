@@ -5,10 +5,11 @@ using OperatingSystem = AzureClientUI.DataObjects.OperatingSystem;
 
 namespace AzureClientUI.Models
 {
-    class Device : INotifyPropertyChanged
+    class DeviceModel : INotifyPropertyChanged
     {
         private string name;
         private string address;
+        private string port;
         private string acpVersion;
         private OperatingSystem operatingSystem;
 
@@ -32,6 +33,18 @@ namespace AzureClientUI.Models
                 if (address == value) return;
 
                 address = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Port
+        {
+            get => port;
+            set
+            {
+                if (port == value) return;
+
+                port = value;
                 OnPropertyChanged();
             }
         }

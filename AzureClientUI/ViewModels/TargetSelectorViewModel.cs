@@ -16,7 +16,7 @@ namespace AzureClientUI.ViewModels
 {
     public class TargetSelectorViewModel : INotifyPropertyChanged
     {
-        public List<Models.Process> Processes { get; set; }
+        public List<Models.ProcessModel> Processes { get; set; }
         public ICommand RemoteDeviceButtonCommand { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -24,7 +24,7 @@ namespace AzureClientUI.ViewModels
         {
             RemoteDeviceButtonCommand = new RelayCommand(ShowRemoteDeviceWindow, CanShowRemoteDeviceWindow);
 
-            Processes = new List<Models.Process>();
+            Processes = new List<Models.ProcessModel>();
 
             var processes = Process.GetProcesses();
 
@@ -34,7 +34,7 @@ namespace AzureClientUI.ViewModels
                 {
                     try
                     {
-                        Processes.Add(new Models.Process
+                        Processes.Add(new Models.ProcessModel
                         {
                             PID = process.Id,
                             Name = process.ProcessName,
