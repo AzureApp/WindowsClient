@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace AzureClientUI.ViewModels
@@ -35,12 +36,24 @@ namespace AzureClientUI.ViewModels
             {
                 return;
             }
+
             // This code is only temporary
-            // TODO: move device connections to a global store of some sort
-            ConnectionManager manager = new ConnectionManager();
+            App app = (App)Application.Current;
+            ConnectionManager manager = app.GetConnectionManager();
 
             ClientConnection client = manager.Connect(RemoteDevice.Address, port);
-            client.Run();
+            if (client != null)
+            {
+                client.Run();
+            }
+            else
+            {
+                MessageBox.Show(String.Format(
+                    "Could not connect to client at {0}:{1}",
+                    RemoteDevice.Address,
+                    RemoteDevice.Port),
+                    "Error");
+            }
         }
 
         private bool CanConnect(object param)
