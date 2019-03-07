@@ -24,12 +24,6 @@ namespace AzureClientUI
             var application = new App();
             application.InitializeComponent();
             application.Run();
-            new Thread(() =>
-            {
-                Thread.CurrentThread.IsBackground = true;
-                ConnectionManager manager = new ConnectionManager();
-                manager.Connect("127.0.0.1", 1248);
-            }).Start();
         }
     }
 }
