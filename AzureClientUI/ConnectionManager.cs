@@ -15,7 +15,7 @@ namespace AzureClientUI
 
         private static ManualResetEvent connectDone = new ManualResetEvent(false);
 
-        public Task<ClientConnection> Connect(string ip, int port)
+        public Task<ClientConnection> Connect(string ip, int port, int timeout = 1000)
         {
             Socket socket = null;
             try
@@ -29,7 +29,7 @@ namespace AzureClientUI
 
                 return Task<ClientConnection>.Factory.StartNew(() =>
                 {
-                    if (connectDone.WaitOne(1000))
+                    if (connectDone.WaitOne(timeout))
                     {
                         var cc = new ClientConnection(socket);
                         connections.Add(cc);
