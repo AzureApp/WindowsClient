@@ -41,7 +41,18 @@ namespace AzureClientUI.ViewModels
             App app = (App)Application.Current;
             ConnectionManager manager = app.GetConnectionManager();
 
-            ClientConnection client = manager.Connect(RemoteDevice.Address, port);
+            var connectTask = manager.Connect(RemoteDevice.Address, port);
+            connectTask.ContinueWith(OnNewConnection);
+        }
+
+        private bool CanConnect(object param)
+        {
+            return !RemoteDevice.HasErrors;
+        }
+
+        private void OnNewConnection(Task<ClientConnection> clientTask)
+        {
+            var client = clientTask.Result;
             if (client != null)
             {
                 client.Run();
@@ -54,11 +65,6 @@ namespace AzureClientUI.ViewModels
                     RemoteDevice.Port),
                     "Error");
             }
-        }
-
-        private bool CanConnect(object param)
-        {
-            return !RemoteDevice.HasErrors;
         }
 
         protected virtual void RaisePropertyChanged(string propertyName)

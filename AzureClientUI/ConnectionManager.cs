@@ -15,7 +15,7 @@ namespace AzureClientUI
 
         private static ManualResetEvent connectDone = new ManualResetEvent(false);
 
-        public ClientConnection Connect(string ip, int port)
+        public Task<ClientConnection> Connect(string ip, int port)
         {
             Socket socket = null;
             try
@@ -26,19 +26,26 @@ namespace AzureClientUI
                 socket = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
 
                 socket.BeginConnect(remoteEP, new AsyncCallback(ConnectCallback), socket);
-                if (connectDone.WaitOne(1000))
+
+                return Task<ClientConnection>.Factory.StartNew(() =>
                 {
-                    var cc = new ClientConnection(socket);
-                    connections.Add(cc);
-                    return cc;
-                }
-                return null;
+                    if (connectDone.WaitOne(1000))
+                    {
+                        var cc = new ClientConnection(socket);
+                        connections.Add(cc);
+                        return cc;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                });
             }
             catch (SocketException e)
             {
                 Console.WriteLine("SocketException e: {0}", e);
+                return Task.FromResult<ClientConnection>(null);
             }
-            return null;
         }
 
         private static void ConnectCallback(IAsyncResult result)
@@ -54,8 +61,7 @@ namespace AzureClientUI
             }
             catch (Exception e)
             {
-                Console.WriteLine("Failed to connect to target at {0} [error {1}]",
-                    socket.RemoteEndPoint.ToString(),
+                Console.WriteLine("Failed to connect to target [error {0}]",
                     e.ToString());
             }
         }
