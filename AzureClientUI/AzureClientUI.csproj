@@ -73,6 +73,7 @@
       <DependentUpon>TargetSelector.xaml</DependentUpon>
     </Compile>
     <Compile Include="DataObjects\HandshakeObject.cs" />
+    <Compile Include="Helpers\DataObjectParser.cs" />
     <Compile Include="Helpers\IconConverter.cs" />
     <Compile Include="Controls\UnresizableGridViewColumn.cs" />
     <Compile Include="Helpers\RelayCommand.cs" />

@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net.Sockets;
-using MsgPack.Serialization;
-using AzureClientUI.DataObjects;
 using System.Threading;
 using System.IO;
+using AzureClientUI.Helpers;
+using AzureClientUI.DataObjects;
+
 
 namespace AzureClientUI
 {
@@ -29,7 +30,7 @@ namespace AzureClientUI
         // size of initial buffer (buffer gets resized if read amount is above this limit)
         public const int BufferSize = 1024;
         // byte array to hold read bytes
-        public byte[] buffer = null;
+        public byte[] buffer = new byte[BufferSize];
         // memory stream holds read data
         public MemoryStream stream = new MemoryStream();
         // binary writer
@@ -45,6 +46,7 @@ namespace AzureClientUI
     public class ClientConnection
     {
         private Socket socket;
+        private DataObjectHelper dataObjectHelper;
 
         public EventHandler<MessageArgs> OnNewMessage;
 
@@ -54,6 +56,7 @@ namespace AzureClientUI
         public ClientConnection(Socket socket)
         {
             this.socket = socket;
+            this.dataObjectHelper = new DataObjectHelper();
         }
 
         private static string ByteArrayToString(byte[] ba)
@@ -86,21 +89,12 @@ namespace AzureClientUI
             // On a new connection we want to immidiately send a HandshakeObject 
             // this lets the server know info about our client
             HandshakeObject obj = new HandshakeObject();
-
-            var context = new SerializationContext();
-            context.EnumSerializationOptions.SerializationMethod = EnumSerializationMethod.ByUnderlyingValue;
-
-            var serializer = MessagePackSerializer.Get<HandshakeObject>(context);
-
-            var bytes = serializer.PackSingleObject(obj);
-            Console.WriteLine(ByteArrayToString(bytes));
+            var bytes = dataObjectHelper.Pack(obj);
 
             MemoryStream stream = new MemoryStream();
 
-            serializer.Pack(stream, obj);
-
             Console.WriteLine("Meta object has magic: {0}", obj.Magic);
-            Send(stream.ToArray());
+            Send(bytes);
         }
 
         public void Send(byte[] data)
@@ -108,7 +102,7 @@ namespace AzureClientUI
             socket.BeginSend(data, 0, data.Length, 0, new AsyncCallback(SendCallback), socket);
         }
 
-        private static void ReceiveCallback(IAsyncResult result)
+        private void ReceiveCallback(IAsyncResult result)
         {
             ReadState state = (ReadState)result.AsyncState;
 
@@ -127,12 +121,13 @@ namespace AzureClientUI
 
                     client.BeginReceive(state.buffer, 0, ReadState.BufferSize, 0,
                         new AsyncCallback(ReceiveCallback), state);
+
+                    MetaObject obj = dataObjectHelper.Unpack<MetaObject>(stream.GetBuffer());
+                    OnNewMessage(this, new MessageArgs(obj));
                 }
                 else
                 {
-                    // deserialize data in stream to a messagepack object 
-                    // then emit callback event
-                    receiveDone.Set();
+                    // TODO: what to put here?
                 }
             }
             catch (Exception e)
@@ -143,12 +138,12 @@ namespace AzureClientUI
             }
         }
 
-        private static void SendCallback(IAsyncResult result)
+        private void SendCallback(IAsyncResult result)
         {
             try
             {
                 // Retrieve the socket from the state object.  
-                Socket client = (Socket)result.AsyncState;
+                Socket client = this.socket; // (Socket)result.AsyncState;
 
                 // Complete sending the data to the remote device.  
                 int bytesSent = client.EndSend(result);

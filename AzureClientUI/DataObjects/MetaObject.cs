@@ -4,16 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AzureClientUI.Helpers;
 
-namespace AzureClientUI
+namespace AzureClientUI.DataObjects
 {
-    public enum ObjectType
-    {
-        Meta = 0,
-        Handshake,
-        Search
-    };
-
     public class MetaObject
     {
         [MessagePackMember(0)]
