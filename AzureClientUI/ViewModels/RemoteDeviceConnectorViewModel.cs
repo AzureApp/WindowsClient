@@ -1,4 +1,5 @@
-﻿using AzureClientUI.Helpers;
+﻿using AzureClientUI.DataObjects;
+using AzureClientUI.Helpers;
 using AzureClientUI.Models;
 using System;
 using System.Collections.Generic;
@@ -56,6 +57,7 @@ namespace AzureClientUI.ViewModels
             if (client != null)
             {
                 client.Run();
+                client.OnNewMessage += OnNewMessage;
             }
             else
             {
@@ -64,6 +66,20 @@ namespace AzureClientUI.ViewModels
                     RemoteDevice.Address,
                     RemoteDevice.Port),
                     "Error");
+            }
+        }
+
+        private void OnNewMessage(object sender, MessageArgs args)
+        {
+            if (args.Message.Type == ObjectType.Handshake)
+            {
+                var handshake = args.Message as HandshakeObject;
+                MessageBox.Show(String.Format(
+                    "New connection to {0} device at {1}:{2}",
+                    handshake.System.ToString(),
+                    RemoteDevice.Address,
+                    RemoteDevice.Port),
+                    "New Connection");
             }
         }
 
