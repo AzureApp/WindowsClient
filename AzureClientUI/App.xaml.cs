@@ -14,10 +14,6 @@ namespace AzureClientUI
     /// </summary>
     public partial class App : Application
     {
-        private readonly ConnectionManager connectionManager = new ConnectionManager();
-
-        public ConnectionManager GetConnectionManager() => connectionManager;
-
         [STAThread]
         public static void Main()
         {

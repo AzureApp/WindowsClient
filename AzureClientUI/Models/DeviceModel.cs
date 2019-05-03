@@ -1,8 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-using OperatingSystem = AzureClientUI.DataObjects.OperatingSystem;
-
 namespace AzureClientUI.Models
 {
     class DeviceModel : INotifyPropertyChanged
@@ -11,7 +9,6 @@ namespace AzureClientUI.Models
         private string address;
         private string port;
         private string acpVersion;
-        private OperatingSystem operatingSystem;
 
         public string Name
         {
@@ -60,19 +57,6 @@ namespace AzureClientUI.Models
                 OnPropertyChanged();
             }
         }
-
-        public OperatingSystem OperatingSystem
-        {
-            get => operatingSystem;
-            set
-            {
-                if (operatingSystem == value) return;
-
-                operatingSystem = value;
-                OnPropertyChanged();
-            }
-        }
-
 
         public event PropertyChangedEventHandler PropertyChanged;
 
