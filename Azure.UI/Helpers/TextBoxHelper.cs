@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace AzureClientUI.Helpers
+namespace Azure.UI.Helpers
 {
     public static class TextBoxHelper
     {

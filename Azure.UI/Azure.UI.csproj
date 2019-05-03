@@ -133,6 +133,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Azure.Proto\Azure.Proto.csproj">
+      <Project>{8e700624-e8c6-4e96-8214-e1198302d19d}</Project>
+      <Name>Azure.Proto</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

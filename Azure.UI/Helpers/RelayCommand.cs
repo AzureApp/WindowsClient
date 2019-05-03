@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace AzureClientUI.Helpers
+namespace Azure.UI.Helpers
 {
     class RelayCommand : ICommand
     {

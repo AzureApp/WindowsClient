@@ -8,11 +8,11 @@ using System.Runtime.CompilerServices;
 using MahApps.Metro.Controls.Dialogs;
 using System.Diagnostics;
 using System.Windows.Input;
-using AzureClientUI.Helpers;
-using AzureClientUI.Controls;
+using Azure.UI.Helpers;
+using Azure.UI.Controls;
 using System.Windows;
 
-namespace AzureClientUI.ViewModels
+namespace Azure.UI.ViewModels
 {
     public class TargetSelectorViewModel : INotifyPropertyChanged
     {

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AzureClientUI.Properties
+namespace Azure.UI.Properties
 {
 
 

@@ -13,7 +13,7 @@ using System.ComponentModel;
 using System.Windows.Data;
 using System.Globalization;
 
-namespace AzureClientUI.Helpers
+namespace Azure.UI.Helpers
 {
 
     static class IconHelper

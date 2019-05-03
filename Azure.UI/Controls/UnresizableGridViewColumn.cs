@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace AzureClientUI.Controls
+namespace Azure.UI.Controls
 {
     public class UnresizableGridViewColumn : GridViewColumn
     {

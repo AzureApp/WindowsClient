@@ -14,8 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MahApps.Metro;
 using MahApps.Metro.Controls;
-using AzureClientUI.ViewModels;
-namespace AzureClientUI
+using Azure.UI.ViewModels;
+namespace Azure.UI
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

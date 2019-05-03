@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace AzureClientUI
+namespace Azure.UI
 {
     /// <summary>
     /// Interaction logic for App.xaml

@@ -1,5 +1,5 @@
-﻿using AzureClientUI.Helpers;
-using AzureClientUI.Models;
+﻿using Azure.UI.Helpers;
+using Azure.UI.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
-namespace AzureClientUI.ViewModels
+namespace Azure.UI.ViewModels
 {
     class RemoteDeviceConnectorViewModel : INotifyPropertyChanged
     {

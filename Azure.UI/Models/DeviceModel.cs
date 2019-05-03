@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace AzureClientUI.Models
+namespace Azure.UI.Models
 {
     class DeviceModel : INotifyPropertyChanged
     {

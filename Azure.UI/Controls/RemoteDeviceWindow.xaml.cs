@@ -10,17 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MahApps.Metro.Controls;
 
-namespace AzureClientUI.Controls
+namespace Azure.UI.Controls
 {
     /// <summary>
-    /// Interaction logic for TargetSelector.xaml
+    /// Interaction logic for RemoteDeviceWindow.xaml
     /// </summary>
-    public partial class TargetSelector : UserControl
+    public partial class RemoteDeviceWindow : MetroWindow
     {
-        public TargetSelector()
+        public RemoteDeviceWindow()
         {
             InitializeComponent();
         }

@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AzureClientUI.Models
+namespace Azure.UI.Models
 {
     public class BaseModel : INotifyPropertyChanged, INotifyDataErrorInfo
     {

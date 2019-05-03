@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Drawing;
 
-namespace AzureClientUI.Models
+namespace Azure.UI.Models
 {
     public class ProcessModel : INotifyPropertyChanged
     {
