@@ -55,8 +55,8 @@ namespace Azure.UI.Models
 
             if (string.IsNullOrEmpty(propertyName) || propertyName == nameof(Port))
             {
-                short port = 0;
-                if (!Int16.TryParse(Port, out port))
+                ushort port = 0;
+                if (!UInt16.TryParse(Port, out port))
                 {
                     yield return "Port invalid";
                 }
