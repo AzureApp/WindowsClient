@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using Grpc.Core;
+using Azure.Proto;
+using Grpc.Core;
 
 namespace Azure.UI.ViewModels
 {
@@ -39,6 +42,29 @@ namespace Azure.UI.ViewModels
 
             // This code is only temporary
             App app = (App)Application.Current;
+
+            Channel channel = new Channel(RemoteDevice.Address, port, ChannelCredentials.Insecure);
+
+            var connectionClient = new ConnectionService.ConnectionServiceClient(channel);
+
+            try
+            {
+                var reply = connectionClient.Connect(new Handshake
+                {
+                    AzureVersion = "1.0.0",
+                    DeviceInfo = new DeviceInfo
+                    {
+                        DeviceName = "Windows PC",
+                        OperatingSystem = DeviceInfo.Types.OperatingSystem.OsWindows,
+                        OsVersion = "10",
+                        Udid = ""
+                    }
+                });
+            }
+            catch (RpcException e)
+            {
+                Console.WriteLine(e.ToString());
+            }
         }
 
         private bool CanConnect(object param)
