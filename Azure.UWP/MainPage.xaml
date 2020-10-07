@@ -1,0 +1,87 @@
+﻿<Page
+    x:Class="Azure.UWP.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:Azure.UWP"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    Background="{ThemeResource SystemControlAcrylicWindowMediumHighBrush}"
+    mc:Ignorable="d">
+    <Grid>
+        <muxc:NavigationView
+            CompactModeThresholdWidth="100"
+            ExpandedModeThresholdWidth="2000"
+            IsBackButtonVisible="Collapsed"
+            IsBackEnabled="False"
+            IsPaneOpen="False"
+            IsSettingsVisible="True"
+            OpenPaneLength="180"
+            PaneDisplayMode="LeftCompact">
+            <muxc:NavigationView.MenuItems>
+                <muxc:NavigationViewItem
+                    x:Name="SamplePage1Item"
+                    Content="Home"
+                    IsSelected="True"
+                    Tag="SamplePage1">
+                    <muxc:NavigationViewItem.Icon>
+                        <SymbolIcon Symbol="Home" />
+                    </muxc:NavigationViewItem.Icon>
+                </muxc:NavigationViewItem>
+                <muxc:NavigationViewItemSeparator />
+                <muxc:NavigationViewItem
+                    x:Name="SamplePage2Item"
+                    Content="Search"
+                    SelectsOnInvoked="True"
+                    Tag="SamplePage2">
+                    <muxc:NavigationViewItem.Icon>
+                        <SymbolIcon Symbol="Find" />
+                    </muxc:NavigationViewItem.Icon>
+                </muxc:NavigationViewItem>
+                <muxc:NavigationViewItem
+                    x:Name="SamplePage3Item"
+                    Content="Saved Results"
+                    Tag="SamplePage3">
+                    <muxc:NavigationViewItem.Icon>
+                        <SymbolIcon Symbol="Edit" />
+                    </muxc:NavigationViewItem.Icon>
+                </muxc:NavigationViewItem>
+            </muxc:NavigationView.MenuItems>
+            <Grid Background="{ThemeResource RegionBrush}">
+                <muxc:TabView
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Background="{ThemeResource SystemControlAcrylicWindowMediumHighBrush}"
+                    BorderThickness="1">
+                    <muxc:TabViewItem Header="Home" IsClosable="False">
+                        <muxc:TabViewItem.IconSource>
+                            <muxc:SymbolIconSource Symbol="Home" />
+                        </muxc:TabViewItem.IconSource>
+                    </muxc:TabViewItem>
+                    <muxc:TabViewItem Header="Document 1">
+                        <muxc:TabViewItem.IconSource>
+                            <muxc:SymbolIconSource Symbol="Document" />
+                        </muxc:TabViewItem.IconSource>
+                    </muxc:TabViewItem>
+                    <muxc:TabViewItem Header="Document 2">
+                        <muxc:TabViewItem.IconSource>
+                            <muxc:SymbolIconSource Symbol="Document" />
+                        </muxc:TabViewItem.IconSource>
+                    </muxc:TabViewItem>
+                    <muxc:TabViewItem Header="Document 3">
+                        <muxc:TabViewItem.IconSource>
+                            <muxc:SymbolIconSource Symbol="Document" />
+                        </muxc:TabViewItem.IconSource>
+                    </muxc:TabViewItem>
+
+                    <muxc:TabView.TabStripHeader>
+                        <Grid x:Name="ShellTitlebarInset" Background="Transparent" />
+                    </muxc:TabView.TabStripHeader>
+                    <muxc:TabView.TabStripFooter>
+                        <Grid x:Name="CustomDragRegion" Background="Transparent" />
+                    </muxc:TabView.TabStripFooter>
+                </muxc:TabView>
+            </Grid>
+        </muxc:NavigationView>
+    </Grid>
+</Page>
