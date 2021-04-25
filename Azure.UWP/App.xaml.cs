@@ -82,6 +82,9 @@ namespace Azure.UWP
                 ApplicationViewTitleBar titleBar = ApplicationView.GetForCurrentView().TitleBar;
                 titleBar.ButtonBackgroundColor = Colors.Transparent;
                 titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
+                var titleColor = (Color)Application.Current.Resources.ThemeDictionaries["SystemBaseHighColor"];
+                titleBar.ForegroundColor = titleColor;
+                titleBar.ButtonForegroundColor = titleColor;
             }
         }
 
